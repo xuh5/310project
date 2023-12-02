@@ -3,6 +3,9 @@
     <file>images/login1.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>icons/favor.png</file>
+    <file>icons/like.png</file>
+    <file>icons/icon.png</file>
     <file>icons/close.png</file>
   </qresource>
 </RCC>

@@ -1,7 +1,8 @@
-from PyQt5.QtWidgets import  QApplication, QMainWindow
+from PyQt5.QtWidgets import  QApplication, QMainWindow,QMessageBox
 from PyQt5 import QtCore, QtGui
 import login
 import sys
+import main_ui
 class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -10,8 +11,23 @@ class LoginWindow(QMainWindow):
         self.ui.widget_3.hide()
         self.ui.pushButton_1.clicked.connect(self.change_widget2)
         self.ui.pushButton_2.clicked.connect(self.change_widget3)
+        self.ui.pushButton_3.clicked.connect(self.login_in)
         self.show()
+    def login_in(self):
+        account = self.ui.lineEdit.text()
+        password = self.ui.lineEdit_2.text()
+        if account =="123" and password =="456":
+            self.win = MainWindow()
+            self.close()
+        else:
+            self.show_notification("Login Failed", "Wrong username or password")
 
+    def show_notification(self, title, message):
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle(title)
+        msg_box.setText(message)
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.exec_()
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton and self.isMaximized() == False:
             self.m_flag = True
@@ -34,6 +50,13 @@ class LoginWindow(QMainWindow):
     def change_widget2(self):
         self.ui.widget_3.hide()
         self.ui.widget_2.show()
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui= main_ui.Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.show()
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     win = LoginWindow()
