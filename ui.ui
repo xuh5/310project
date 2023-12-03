@@ -157,36 +157,39 @@
           <string notr="true">background-color: rgb(214, 214, 214);</string>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="search_page">
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <layout class="QGridLayout" name="searchandfilter">
-             <item row="0" column="0">
-              <widget class="QLabel" name="name_label">
-               <property name="text">
-                <string>Name</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="searchbar"/>
-             </item>
              <item row="2" column="1">
               <widget class="QComboBox" name="review_comboBox"/>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="review_label">
+              <widget class="QLabel" name="Genre_label">
                <property name="text">
-                <string>Review</string>
+                <string>Genre:</string>
                </property>
               </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="name_label">
+               <property name="text">
+                <string>Name:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="rate_spinBox"/>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="searchbar"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="rate_label">
                <property name="text">
-                <string>Rate</string>
+                <string>Rate:</string>
                </property>
               </widget>
              </item>
@@ -196,20 +199,41 @@
              <item row="3" column="0">
               <widget class="QLabel" name="language_label">
                <property name="text">
-                <string>Language</string>
+                <string>Language:   </string>
                </property>
               </widget>
              </item>
-             <item row="1" column="3">
-              <widget class="QSpinBox" name="rate_spinBox"/>
-             </item>
              <item row="1" column="1">
-              <widget class="QComboBox" name="rate_comboBox"/>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>greater than</string>
+               </property>
+              </widget>
              </item>
-             <item row="2" column="3">
-              <widget class="QSpinBox" name="review_spinBox"/>
+             <item row="0" column="2">
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Ignored</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="submit_pushButton">
+             <property name="text">
+              <string>SUBMIT</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QScrollArea" name="scrollArea">
@@ -222,120 +246,10 @@
                 <x>0</x>
                 <y>0</y>
                 <width>799</width>
-                <height>525</height>
+                <height>490</height>
                </rect>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_5">
-               <item>
-                <layout class="QGridLayout" name="gridLayout">
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_4">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLabel" name="label_5">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_3">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="2">
-                  <widget class="QLabel" name="label_2">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="2">
-                  <widget class="QLabel" name="label_7">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_6">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="2">
-                  <widget class="QLabel" name="label_12">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QLabel" name="label">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QLabel" name="label_9">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="2">
-                  <widget class="QLabel" name="label_10">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="label_11">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="label_8">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="0">
-                  <widget class="QLabel" name="label_13">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QLabel" name="label_14">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="2">
-                  <widget class="QLabel" name="label_15">
-                   <property name="text">
-                    <string>TextLabel</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
+              <layout class="QVBoxLayout" name="verticalLayout_5"/>
              </widget>
             </widget>
            </item>
@@ -344,43 +258,90 @@
          <widget class="QWidget" name="information_page">
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
-            <layout class="QGridLayout" name="movie_infor">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_21">
-               <property name="text">
-                <string>moviename</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="label_23">
-               <property name="text">
-                <string>language</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="label_25">
-               <property name="text">
-                <string>rate</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_22">
-               <property name="text">
-                <string>genre</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>review num</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <widget class="QWidget" name="movie_widget" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_11">
+              <item>
+               <layout class="QGridLayout" name="movie_gridLayout_2">
+                <item row="0" column="2">
+                 <widget class="QLabel" name="language_2">
+                  <property name="text">
+                   <string>language</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="review_num_2">
+                  <property name="text">
+                   <string>review_num</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="rate_2">
+                  <property name="text">
+                   <string>rate</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="genre_2">
+                  <property name="text">
+                   <string>genre</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="name_2">
+                  <property name="text">
+                   <string>name</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QWidget" name="collect_widget_2" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <item>
+                    <spacer name="horizontalSpacer_6">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Ignored</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>115</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="collect_icon_2">
+                     <property name="maximumSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="pixmap">
+                      <pixmap resource="resource.qrc">:/icons/icons/favor.png</pixmap>
+                     </property>
+                     <property name="scaledContents">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="Review_title">
@@ -400,7 +361,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>799</width>
-                <height>565</height>
+                <height>516</height>
                </rect>
               </property>
              </widget>
@@ -424,14 +385,53 @@
                 <height>633</height>
                </rect>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_4"/>
              </widget>
             </widget>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="comments_page"/>
-         <widget class="QWidget" name="favourite_page"/>
+         <widget class="QWidget" name="comments_page">
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QScrollArea" name="scrollArea_3">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_4">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>799</width>
+                <height>633</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="favourite_page">
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QScrollArea" name="scrollArea_4">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_5">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>799</width>
+                <height>633</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>
