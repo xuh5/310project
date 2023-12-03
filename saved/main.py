@@ -55,9 +55,25 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.ui= main_ui.Ui_MainWindow()
         self.ui.setupUi(self)
+    # xhc_write
+        self.ui.search_button.clicked.connect(self.switchsearch)
+        self.ui.like_button.clicked.connect(self.switchlike)
+        self.ui.comments_button.clicked.connect(self.switchcomment)
+        self.ui.favourite_button.clicked.connect(self.swithfavourite)
+
         self.show()
+    def switchsearch(self):
+        self.ui.stackedWidget.setCurrentIndex(0)
+    def switchlike(self):
+        self.ui.stackedWidget.setCurrentIndex(2)
+    def switchcomment(self):
+        self.ui.stackedWidget.setCurrentIndex(3)
+    def swithfavourite(self):
+        self.ui.stackedWidget.setCurrentIndex(4)
+    ######
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    win = LoginWindow()
+    win = MainWindow()
     sys.exit(app.exec_())
