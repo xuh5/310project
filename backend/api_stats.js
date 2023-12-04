@@ -40,8 +40,8 @@ exports.get_stats = async (req, res) => {
         console.log("/stats: calling RDS...");
 
         var sql = `
-          Select count(*) As NumUsers From users;
-          Select count(*) As NumAssets From assets;
+          Select count(*) As NumUsers From User;
+          Select count(*) As NumMovies From Movie;
           `;
 
         dbConnection.query(sql, (err, results, _) => {
@@ -94,7 +94,7 @@ exports.get_stats = async (req, res) => {
           "message": "success",
           "s3_status": metadata["httpStatusCode"],
           "db_numUsers": row_r1["NumUsers"],
-          "db_numAssets": row_r2["NumAssets"]
+          "db_NumMovies": row_r2["NumMovies"]
         });
       }
       catch (code_err) {

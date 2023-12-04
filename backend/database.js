@@ -11,12 +11,12 @@ const ini = require('ini');
 
 const config = require('./config.js');
 
-const photoapp_config = ini.parse(fs.readFileSync(config.photoapp_config, 'utf-8'));
-const endpoint = photoapp_config.rds.endpoint;
-const port_number = photoapp_config.rds.port_number;
-const user_name = photoapp_config.rds.user_name;
-const user_pwd = photoapp_config.rds.user_pwd;
-const db_name = photoapp_config.rds.db_name;
+const movieapp_config = ini.parse(fs.readFileSync(config.movieapp_config, 'utf-8'));
+const endpoint = movieapp_config.rds.endpoint;
+const port_number = movieapp_config.rds.port_number;
+const user_name = movieapp_config.rds.user_name;
+const user_pwd = movieapp_config.rds.user_pwd;
+const db_name = movieapp_config.rds.db_name;
 
 //
 // creates connection object, but doesn't open connnection:

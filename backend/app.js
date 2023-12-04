@@ -44,7 +44,7 @@ app.listen(config.service_port, () => {
   //
   // Configure AWS to use our config file:
   //
-  process.env.AWS_SHARED_CREDENTIALS_FILE = config.photoapp_config;
+  process.env.AWS_SHARED_CREDENTIALS_FILE = config.movieapp_config;
 });
 
 app.get('/', (req, res) => {
