@@ -12,7 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import comment_rc
 import json
 import movie_info_rc
-
 import review_rc
 
 
@@ -188,7 +187,7 @@ class Ui_MainWindow(object):
         #load like page comments
         self.vertical_like_page = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.vertical_like_page.setObjectName("vertical_like_page")
-        self.loadui(self.like_page,self.vertical_like_page,0)
+        self.loadui(self.scrollAreaWidgetContents_3,self.vertical_like_page,0)
         ######################
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.addWidget(self.scrollArea_2)
@@ -206,7 +205,7 @@ class Ui_MainWindow(object):
         #load comment page comments:
         self.vertical_comment_page = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.vertical_comment_page.setObjectName("vertical_comment_page")
-        self.loadui(self.comments_page,self.vertical_comment_page,0)
+        self.loadui(self.scrollAreaWidgetContents_4,self.vertical_comment_page,0)
         ###############
         self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_4)
         self.verticalLayout_7.addWidget(self.scrollArea_3)
@@ -224,7 +223,7 @@ class Ui_MainWindow(object):
         ##########load
         self.vertical_favor_page = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.vertical_favor_page.setObjectName("vertical_favor_page")
-        self.loadui(self.favourite_page,self.vertical_favor_page,1)
+        self.loadui(self.scrollAreaWidgetContents_5,self.vertical_favor_page,1)
         #############
         self.scrollArea_4.setWidget(self.scrollAreaWidgetContents_5)
         self.verticalLayout_8.addWidget(self.scrollArea_4)
@@ -270,14 +269,11 @@ class Ui_MainWindow(object):
         for key, values in data.items():
             for index, value in enumerate(values):
                 result_lists[index].append(value)
-        print(result_lists)
         #####chose which UI to load
         uioption= [comment_rc,movie_info_rc,review_rc]
         # datastructure : rating, reviewtext,review date,image_url
         for i in range(10):  # Adjust the number of instances as needed
-            ui_added = uioption[choice].Ui_Form()
-            ui_added.setupUi(page,result_lists[i])
-            layout_.addWidget(ui_added.widget_)
-            layout_.addWidget(ui_added.widget_)
+            ui_added = uioption[choice].Ui_Form(result_lists[i])
+            layout_.addWidget(ui_added)
 
 import resource_rc

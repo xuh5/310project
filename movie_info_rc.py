@@ -10,32 +10,43 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from PyQt5 import QtCore, QtGui, QtWidgets
+import resource_rc
+import random
 
-class Ui_Form(object):
-    def setupUi(self, Form,data):
-        Form.setObjectName("Form")
-        Form.resize(667, 522)
-        self.widget_ = QtWidgets.QWidget(Form)
-        self.widget_.setGeometry(QtCore.QRect(50, 80, 381, 271))
-        self.widget_.setObjectName("widget_")
-        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.widget_)
+class Ui_Form(QtWidgets.QWidget):
+    def __init__(self, data):
+        super(Ui_Form, self).__init__()
+        self.setupUi(data)
+
+    def setupUi(self, data):
+        self.setObjectName("Form")
+        self.resize(667, 522)
+
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self)
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
+
         self.movie_gridLayout = QtWidgets.QGridLayout()
         self.movie_gridLayout.setObjectName("movie_gridLayout")
-        self.language = QtWidgets.QLabel(self.widget_)
+
+        self.language = QtWidgets.QLabel(self)
         self.language.setObjectName("language")
         self.movie_gridLayout.addWidget(self.language, 0, 2, 1, 1)
-        self.review_num = QtWidgets.QLabel(self.widget_)
+
+        self.review_num = QtWidgets.QLabel(self)
         self.review_num.setObjectName("review_num")
         self.movie_gridLayout.addWidget(self.review_num, 1, 0, 1, 1)
-        self.rate = QtWidgets.QLabel(self.widget_)
+
+        self.rate = QtWidgets.QLabel(self)
         self.rate.setObjectName("rate")
         self.movie_gridLayout.addWidget(self.rate, 1, 1, 1, 1)
-        self.genre = QtWidgets.QLabel(self.widget_)
+
+        self.genre = QtWidgets.QLabel(self)
         self.genre.setObjectName("genre")
         self.movie_gridLayout.addWidget(self.genre, 0, 1, 1, 1)
-        self.collect_widget = QtWidgets.QWidget(self.widget_)
+
+        self.collect_widget = QtWidgets.QWidget(self)
         self.collect_widget.setObjectName("collect_widget")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.collect_widget)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -49,7 +60,8 @@ class Ui_Form(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_3.addWidget(self.pushButton)
         self.movie_gridLayout.addWidget(self.collect_widget, 1, 2, 1, 1)
-        self.name_pushbutton = QtWidgets.QPushButton(self.widget_)
+
+        self.name_pushbutton = QtWidgets.QPushButton(self)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -59,23 +71,30 @@ class Ui_Form(object):
         self.name_pushbutton.setStyleSheet("\n"
 "#name_pushbutton{\n"
 "text-align: left;\n"
-"border:nones;\n"
+"border:none;\n"
 "padding-left: 20px; \n"
 "}")
         self.name_pushbutton.setAutoDefault(False)
         self.name_pushbutton.setObjectName("name_pushbutton")
         self.movie_gridLayout.addWidget(self.name_pushbutton, 0, 0, 1, 1)
+
         self.verticalLayout_10.addLayout(self.movie_gridLayout)
+        self.retranslateUi(data)
+        QtCore.QMetaObject.connectSlotsByName(self)
 
-        self.retranslateUi(Form,data)
-        QtCore.QMetaObject.connectSlotsByName(Form)
-
-    def retranslateUi(self, Form,data):
+    def retranslateUi(self, data):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.language.setText(_translate("Form", str(data[3])))
         self.review_num.setText(_translate("Form", str(data[4])))
         self.rate.setText(_translate("Form", str(data[1])))
         self.genre.setText(_translate("Form", str(data[2])))
         self.name_pushbutton.setText(_translate("Form", str(data[0])))
-import resource_rc
+
+# Example usage
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    ui = Ui_Form(["Movie Name", "Rate", "Genre", "Language", "Review Number"])
+    ui.show()
+    sys.exit(app.exec_())

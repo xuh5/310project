@@ -9,23 +9,32 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import resource_rc
 
+class Ui_Form(QtWidgets.QWidget):
+    def __init__(self, data):
+        super(Ui_Form, self).__init__()
+        self.setupUi(data)
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(1120, 872)
-        self.widget_ = QtWidgets.QWidget(Form)
+    def setupUi(self, data):
+        self.setObjectName("Form")
+        self.resize(1120, 872)
+
+        self.widget_ = QtWidgets.QWidget(self)
         self.widget_.setGeometry(QtCore.QRect(180, 80, 761, 401))
         self.widget_.setObjectName("widget_")
+
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_)
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+
         self.widget_2 = QtWidgets.QWidget(self.widget_)
         self.widget_2.setMaximumSize(QtCore.QSize(100, 100))
         self.widget_2.setObjectName("widget_2")
+
         self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.widget_2)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
+
         self.label_16 = QtWidgets.QLabel(self.widget_2)
         self.label_16.setMinimumSize(QtCore.QSize(50, 50))
         self.label_16.setMaximumSize(QtCore.QSize(50, 50))
@@ -37,41 +46,50 @@ class Ui_Form(object):
         self.label_16.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
         self.label_16.setObjectName("label_16")
         self.verticalLayout_8.addWidget(self.label_16)
+
         self.username_label = QtWidgets.QLabel(self.widget_2)
         self.username_label.setMaximumSize(QtCore.QSize(50, 50))
         self.username_label.setAlignment(QtCore.Qt.AlignCenter)
         self.username_label.setObjectName("username_label")
         self.verticalLayout_8.addWidget(self.username_label)
         self.horizontalLayout_4.addWidget(self.widget_2)
+
         self.widget_3 = QtWidgets.QWidget(self.widget_)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
+
         self.widget_4 = QtWidgets.QWidget(self.widget_3)
         self.widget_4.setObjectName("widget_4")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_4)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
+
         self.label = QtWidgets.QLabel(self.widget_4)
         self.label.setMinimumSize(QtCore.QSize(60, 20))
         self.label.setMaximumSize(QtCore.QSize(60, 20))
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
+
         self.doubleSpinBox = QtWidgets.QDoubleSpinBox(self.widget_4)
         self.doubleSpinBox.setDecimals(1)
         self.doubleSpinBox.setMaximum(10.0)
         self.doubleSpinBox.setObjectName("doubleSpinBox")
         self.horizontalLayout.addWidget(self.doubleSpinBox)
+
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
+
         self.label_2 = QtWidgets.QLabel(self.widget_4)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_2.addWidget(self.label_2)
         self.verticalLayout.addWidget(self.widget_4)
+
         self.widget_5 = QtWidgets.QWidget(self.widget_3)
         self.widget_5.setObjectName("widget_5")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_5)
@@ -79,6 +97,7 @@ class Ui_Form(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+
         self.lineEdit = QtWidgets.QLineEdit(self.widget_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -89,37 +108,50 @@ class Ui_Form(object):
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_2.addWidget(self.lineEdit)
         self.verticalLayout.addWidget(self.widget_5)
+
         self.widget_6 = QtWidgets.QWidget(self.widget_3)
         self.widget_6.setObjectName("widget_6")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_6)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+
         self.select_file_button_2 = QtWidgets.QPushButton(self.widget_6)
         self.select_file_button_2.setAutoDefault(False)
         self.select_file_button_2.setDefault(False)
         self.select_file_button_2.setObjectName("select_file_button_2")
         self.horizontalLayout_3.addWidget(self.select_file_button_2)
+
         self.file_dir_label_2 = QtWidgets.QLabel(self.widget_6)
         self.file_dir_label_2.setText("")
         self.file_dir_label_2.setObjectName("file_dir_label_2")
         self.horizontalLayout_3.addWidget(self.file_dir_label_2)
+
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
+
         self.submit_button_2 = QtWidgets.QPushButton(self.widget_6)
         self.submit_button_2.setObjectName("submit_button_2")
         self.horizontalLayout_3.addWidget(self.submit_button_2)
         self.verticalLayout.addWidget(self.widget_6)
+
         self.horizontalLayout_4.addWidget(self.widget_3)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.username_label.setText(_translate("Form", "name"))
         self.label.setText(_translate("Form", "Rating:"))
         self.label_2.setText(_translate("Form", "Review:"))
         self.lineEdit.setPlaceholderText(_translate("Form", "write your review:"))
         self.select_file_button_2.setText(_translate("Form", "upload"))
         self.submit_button_2.setText(_translate("Form", "submit"))
-import resource_rc
+
+# Example usage
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    ui = Ui_Form("std")
+    ui.show()
+    sys.exit(app.exec_())
