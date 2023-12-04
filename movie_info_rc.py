@@ -52,12 +52,17 @@ class Ui_Form(QtWidgets.QWidget):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem = QtWidgets.QSpacerItem(115, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
-        self.pushButton = QtWidgets.QPushButton(self.collect_widget)
+
+        self.pushButton = QtWidgets.QToolButton(self.collect_widget)
         self.pushButton.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/icons/favor.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon)
+        self.pushButton.setCheckable(True)  # Make the button checkable
+        self.pushButton.setChecked(True)  # Set the initial state
+        self.checked_image = QtGui.QPixmap(":/icons/icons/favor_t.png")
+        self.unchecked_image = QtGui.QPixmap(":/icons/icons/favor.png")
+        self.pushButton.toggled.connect(self.onToggleButtonClicked)
+        self.onToggleButtoninitialize()
         self.pushButton.setObjectName("pushButton")
+
         self.horizontalLayout_3.addWidget(self.pushButton)
         self.movie_gridLayout.addWidget(self.collect_widget, 1, 2, 1, 1)
 
@@ -90,7 +95,21 @@ class Ui_Form(QtWidgets.QWidget):
         self.rate.setText(_translate("Form", str(data[1])))
         self.genre.setText(_translate("Form", str(data[2])))
         self.name_pushbutton.setText(_translate("Form", str(data[0])))
+    def onToggleButtoninitialize(self):
+        icon = QtGui.QIcon()
+        if self.pushButton.isChecked():
+            icon.addPixmap(self.checked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        else:
+            icon.addPixmap(self.unchecked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton.setIcon(icon)
 
+    def onToggleButtonClicked(self,state):
+        icon = QtGui.QIcon()
+        if state:
+            icon.addPixmap(self.checked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        else:
+            icon.addPixmap(self.unchecked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton.setIcon(icon)
 # Example usage
 if __name__ == "__main__":
     import sys

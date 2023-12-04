@@ -5,6 +5,7 @@
   </qresource>
   <qresource prefix="icons">
     <file>icons/like_t.png</file>
+    <file>icons/favor_t.png</file>
     <file>icons/favor.png</file>
     <file>icons/like.png</file>
     <file>icons/icon.png</file>

@@ -105,6 +105,7 @@ class Ui_Form(QtWidgets.QWidget):
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.widget_5)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
 
+        #####setting likebutton
         self.pushButton = QtWidgets.QToolButton(self.widget_5)
         self.pushButton.setText("")
         self.pushButton.setCheckable(True)  # Make the button checkable
