@@ -11,31 +11,31 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_For(object):
-    def setupUi(self, For):
-        For.setObjectName("For")
-        For.resize(667, 522)
-        self.movie_widget = QtWidgets.QWidget(For)
-        self.movie_widget.setGeometry(QtCore.QRect(50, 80, 381, 271))
-        self.movie_widget.setObjectName("movie_widget")
-        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.movie_widget)
+class Ui_Form(object):
+    def setupUi(self, Form,data):
+        Form.setObjectName("Form")
+        Form.resize(667, 522)
+        self.widget_ = QtWidgets.QWidget(Form)
+        self.widget_.setGeometry(QtCore.QRect(50, 80, 381, 271))
+        self.widget_.setObjectName("widget_")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.widget_)
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.movie_gridLayout = QtWidgets.QGridLayout()
         self.movie_gridLayout.setObjectName("movie_gridLayout")
-        self.language = QtWidgets.QLabel(self.movie_widget)
+        self.language = QtWidgets.QLabel(self.widget_)
         self.language.setObjectName("language")
         self.movie_gridLayout.addWidget(self.language, 0, 2, 1, 1)
-        self.review_num = QtWidgets.QLabel(self.movie_widget)
+        self.review_num = QtWidgets.QLabel(self.widget_)
         self.review_num.setObjectName("review_num")
         self.movie_gridLayout.addWidget(self.review_num, 1, 0, 1, 1)
-        self.rate = QtWidgets.QLabel(self.movie_widget)
+        self.rate = QtWidgets.QLabel(self.widget_)
         self.rate.setObjectName("rate")
         self.movie_gridLayout.addWidget(self.rate, 1, 1, 1, 1)
-        self.genre = QtWidgets.QLabel(self.movie_widget)
+        self.genre = QtWidgets.QLabel(self.widget_)
         self.genre.setObjectName("genre")
         self.movie_gridLayout.addWidget(self.genre, 0, 1, 1, 1)
-        self.collect_widget = QtWidgets.QWidget(self.movie_widget)
+        self.collect_widget = QtWidgets.QWidget(self.widget_)
         self.collect_widget.setObjectName("collect_widget")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.collect_widget)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -49,7 +49,7 @@ class Ui_For(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_3.addWidget(self.pushButton)
         self.movie_gridLayout.addWidget(self.collect_widget, 1, 2, 1, 1)
-        self.name_pushbutton = QtWidgets.QPushButton(self.movie_widget)
+        self.name_pushbutton = QtWidgets.QPushButton(self.widget_)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -67,15 +67,15 @@ class Ui_For(object):
         self.movie_gridLayout.addWidget(self.name_pushbutton, 0, 0, 1, 1)
         self.verticalLayout_10.addLayout(self.movie_gridLayout)
 
-        self.retranslateUi(For)
-        QtCore.QMetaObject.connectSlotsByName(For)
+        self.retranslateUi(Form,data)
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self, For):
+    def retranslateUi(self, Form,data):
         _translate = QtCore.QCoreApplication.translate
-        For.setWindowTitle(_translate("For", "Form"))
-        self.language.setText(_translate("For", "language"))
-        self.review_num.setText(_translate("For", "review_num"))
-        self.rate.setText(_translate("For", "rate"))
-        self.genre.setText(_translate("For", "genre"))
-        self.name_pushbutton.setText(_translate("For", "name"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.language.setText(_translate("Form", str(data[3])))
+        self.review_num.setText(_translate("Form", str(data[4])))
+        self.rate.setText(_translate("Form", str(data[1])))
+        self.genre.setText(_translate("Form", str(data[2])))
+        self.name_pushbutton.setText(_translate("Form", str(data[0])))
 import resource_rc

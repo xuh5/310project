@@ -11,17 +11,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_likepage(object):
+class Ui_Form(object):
     def setupUi(self, likepage,data):
         likepage.setObjectName("likepage")
         likepage.resize(591, 482)
-        self.widget_6 = QtWidgets.QWidget(likepage)
-        self.widget_6.setGeometry(QtCore.QRect(90, 60, 455, 398))
-        self.widget_6.setObjectName("widget_6")
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.widget_6)
+        self.widget_ = QtWidgets.QWidget(likepage)
+        self.widget_.setGeometry(QtCore.QRect(90, 60, 455, 398))
+        self.widget_.setObjectName("widget_")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.widget_)
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.widget_3 = QtWidgets.QWidget(self.widget_6)
+        self.widget_3 = QtWidgets.QWidget(self.widget_)
         self.widget_3.setMaximumSize(QtCore.QSize(16777215, 158))
         self.widget_3.setObjectName("widget_3")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_3)
@@ -65,7 +65,7 @@ class Ui_likepage(object):
         self.verticalLayout_10.addWidget(self.label_19)
         self.horizontalLayout_3.addWidget(self.widget_2)
         self.verticalLayout_7.addWidget(self.widget_3)
-        self.widget_4 = QtWidgets.QWidget(self.widget_6)
+        self.widget_4 = QtWidgets.QWidget(self.widget_)
         self.widget_4.setMinimumSize(QtCore.QSize(200, 200))
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_4)
@@ -80,7 +80,7 @@ class Ui_likepage(object):
         self.label_20.setObjectName("label_20")
         self.horizontalLayout_4.addWidget(self.label_20)
         self.verticalLayout_7.addWidget(self.widget_4)
-        self.widget_5 = QtWidgets.QWidget(self.widget_6)
+        self.widget_5 = QtWidgets.QWidget(self.widget_)
         self.widget_5.setMinimumSize(QtCore.QSize(50, 0))
         self.widget_5.setMaximumSize(QtCore.QSize(16777215, 50))
         self.widget_5.setObjectName("widget_5")
