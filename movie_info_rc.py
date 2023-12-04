@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_For(object):
     def setupUi(self, For):
         For.setObjectName("For")
-        For.resize(468, 498)
+        For.resize(667, 522)
         self.movie_widget = QtWidgets.QWidget(For)
         self.movie_widget.setGeometry(QtCore.QRect(50, 80, 381, 271))
         self.movie_widget.setObjectName("movie_widget")
@@ -35,23 +35,36 @@ class Ui_For(object):
         self.genre = QtWidgets.QLabel(self.movie_widget)
         self.genre.setObjectName("genre")
         self.movie_gridLayout.addWidget(self.genre, 0, 1, 1, 1)
-        self.name = QtWidgets.QLabel(self.movie_widget)
-        self.name.setObjectName("name")
-        self.movie_gridLayout.addWidget(self.name, 0, 0, 1, 1)
         self.collect_widget = QtWidgets.QWidget(self.movie_widget)
         self.collect_widget.setObjectName("collect_widget")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.collect_widget)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem = QtWidgets.QSpacerItem(115, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
-        self.collect_icon = QtWidgets.QLabel(self.collect_widget)
-        self.collect_icon.setMaximumSize(QtCore.QSize(20, 20))
-        self.collect_icon.setText("")
-        self.collect_icon.setPixmap(QtGui.QPixmap(":/icons/icons/favor.png"))
-        self.collect_icon.setScaledContents(True)
-        self.collect_icon.setObjectName("collect_icon")
-        self.horizontalLayout_3.addWidget(self.collect_icon)
+        self.pushButton = QtWidgets.QPushButton(self.collect_widget)
+        self.pushButton.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/favor.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton.setIcon(icon)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout_3.addWidget(self.pushButton)
         self.movie_gridLayout.addWidget(self.collect_widget, 1, 2, 1, 1)
+        self.name_pushbutton = QtWidgets.QPushButton(self.movie_widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.name_pushbutton.sizePolicy().hasHeightForWidth())
+        self.name_pushbutton.setSizePolicy(sizePolicy)
+        self.name_pushbutton.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.name_pushbutton.setStyleSheet("\n"
+"#name_pushbutton{\n"
+"text-align: left;\n"
+"border:nones;\n"
+"padding-left: 20px; \n"
+"}")
+        self.name_pushbutton.setAutoDefault(False)
+        self.name_pushbutton.setObjectName("name_pushbutton")
+        self.movie_gridLayout.addWidget(self.name_pushbutton, 0, 0, 1, 1)
         self.verticalLayout_10.addLayout(self.movie_gridLayout)
 
         self.retranslateUi(For)
@@ -64,5 +77,5 @@ class Ui_For(object):
         self.review_num.setText(_translate("For", "review_num"))
         self.rate.setText(_translate("For", "rate"))
         self.genre.setText(_translate("For", "genre"))
-        self.name.setText(_translate("For", "name"))
+        self.name_pushbutton.setText(_translate("For", "name"))
 import resource_rc

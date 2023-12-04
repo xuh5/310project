@@ -118,4 +118,5 @@ class Ui_likepage(object):
         self.label_27.setText(_translate("likepage", str(data[0])))
         self.label_20.setPixmap(QtGui.QPixmap(data[3]))
         self.label_28.setText(_translate("likepage", str(data[2])))
+
 import resource_rc
