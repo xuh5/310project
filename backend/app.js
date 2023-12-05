@@ -76,7 +76,7 @@ var my_like = require('./my_like.js')
 var my_review = require('./my_review.js')
 
 app.get('/stats', stats.get_stats);  //app.get('/stats', (req, res) => {...});
-app.get('/add_users', user.add_user);  //app.get('/users', (req, res) => {...});
+app.put('/add_user', user.add_user);  //app.get('/users', (req, res) => {...});
 app.get('/login', login.login);
 app.get('/search_film', search.search_film);
 app.post('/add_review', review.add_review);
