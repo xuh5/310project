@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="images">
+    <file>images/login1.png</file>
+    <file>images/sb.png</file>
+  </qresource>
+  <qresource prefix="icons">
+    <file>icons/like_t.png</file>
+    <file>icons/favor_t.png</file>
+    <file>icons/favor.png</file>
+    <file>icons/like.png</file>
+    <file>icons/icon.png</file>
+    <file>icons/close.png</file>
+  </qresource>
+</RCC>

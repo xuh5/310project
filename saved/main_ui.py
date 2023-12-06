@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Form implementation generated from reading ui file 'ui.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
@@ -9,14 +7,16 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import like_rc
+import comment_rc
 import json
-json_file_path = 'output.json'
+import movie_info_rc
+import review_rc
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(915, 809)
+        MainWindow.resize(967, 734)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -75,18 +75,21 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.searchandfilter = QtWidgets.QGridLayout()
         self.searchandfilter.setObjectName("searchandfilter")
-        self.name_label = QtWidgets.QLabel(self.search_page)
-        self.name_label.setObjectName("name_label")
-        self.searchandfilter.addWidget(self.name_label, 0, 0, 1, 1)
-        self.searchbar = QtWidgets.QLineEdit(self.search_page)
-        self.searchbar.setObjectName("searchbar")
-        self.searchandfilter.addWidget(self.searchbar, 0, 1, 1, 1)
         self.review_comboBox = QtWidgets.QComboBox(self.search_page)
         self.review_comboBox.setObjectName("review_comboBox")
         self.searchandfilter.addWidget(self.review_comboBox, 2, 1, 1, 1)
-        self.review_label = QtWidgets.QLabel(self.search_page)
-        self.review_label.setObjectName("review_label")
-        self.searchandfilter.addWidget(self.review_label, 2, 0, 1, 1)
+        self.Genre_label = QtWidgets.QLabel(self.search_page)
+        self.Genre_label.setObjectName("Genre_label")
+        self.searchandfilter.addWidget(self.Genre_label, 2, 0, 1, 1)
+        self.name_label = QtWidgets.QLabel(self.search_page)
+        self.name_label.setObjectName("name_label")
+        self.searchandfilter.addWidget(self.name_label, 0, 0, 1, 1)
+        self.rate_spinBox = QtWidgets.QSpinBox(self.search_page)
+        self.rate_spinBox.setObjectName("rate_spinBox")
+        self.searchandfilter.addWidget(self.rate_spinBox, 1, 2, 1, 1)
+        self.searchbar = QtWidgets.QLineEdit(self.search_page)
+        self.searchbar.setObjectName("searchbar")
+        self.searchandfilter.addWidget(self.searchbar, 0, 1, 1, 1)
         self.rate_label = QtWidgets.QLabel(self.search_page)
         self.rate_label.setObjectName("rate_label")
         self.searchandfilter.addWidget(self.rate_label, 1, 0, 1, 1)
@@ -96,72 +99,27 @@ class Ui_MainWindow(object):
         self.language_label = QtWidgets.QLabel(self.search_page)
         self.language_label.setObjectName("language_label")
         self.searchandfilter.addWidget(self.language_label, 3, 0, 1, 1)
-        self.rate_spinBox = QtWidgets.QSpinBox(self.search_page)
-        self.rate_spinBox.setObjectName("rate_spinBox")
-        self.searchandfilter.addWidget(self.rate_spinBox, 1, 3, 1, 1)
-        self.rate_comboBox = QtWidgets.QComboBox(self.search_page)
-        self.rate_comboBox.setObjectName("rate_comboBox")
-        self.searchandfilter.addWidget(self.rate_comboBox, 1, 1, 1, 1)
-        self.review_spinBox = QtWidgets.QSpinBox(self.search_page)
-        self.review_spinBox.setObjectName("review_spinBox")
-        self.searchandfilter.addWidget(self.review_spinBox, 2, 3, 1, 1)
+        self.label = QtWidgets.QLabel(self.search_page)
+        self.label.setObjectName("label")
+        self.searchandfilter.addWidget(self.label, 1, 1, 1, 1)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
+        self.searchandfilter.addItem(spacerItem2, 0, 2, 1, 1)
         self.verticalLayout_3.addLayout(self.searchandfilter)
+        self.submit_pushButton = QtWidgets.QPushButton(self.search_page)
+        self.submit_pushButton.setObjectName("submit_pushButton")
+        self.verticalLayout_3.addWidget(self.submit_pushButton)
         self.scrollArea = QtWidgets.QScrollArea(self.search_page)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 567, 459))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 490))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.gridLayout = QtWidgets.QGridLayout()
-        self.gridLayout.setObjectName("gridLayout")
-        self.label_4 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 1, 0, 1, 1)
-        self.label_5 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 1, 1, 1, 1)
-        self.label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 0, 0, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 1, 2, 1, 1)
-        self.label_7 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_7.setObjectName("label_7")
-        self.gridLayout.addWidget(self.label_7, 2, 2, 1, 1)
-        self.label_6 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_6.setObjectName("label_6")
-        self.gridLayout.addWidget(self.label_6, 2, 0, 1, 1)
-        self.label_12 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_12.setObjectName("label_12")
-        self.gridLayout.addWidget(self.label_12, 4, 2, 1, 1)
-        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 2, 1, 1)
-        self.label_9 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_9.setObjectName("label_9")
-        self.gridLayout.addWidget(self.label_9, 3, 1, 1, 1)
-        self.label_10 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_10.setObjectName("label_10")
-        self.gridLayout.addWidget(self.label_10, 3, 2, 1, 1)
-        self.label_11 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_11.setObjectName("label_11")
-        self.gridLayout.addWidget(self.label_11, 4, 0, 1, 1)
-        self.label_8 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_8.setObjectName("label_8")
-        self.gridLayout.addWidget(self.label_8, 3, 0, 1, 1)
-        self.label_13 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_13.setObjectName("label_13")
-        self.gridLayout.addWidget(self.label_13, 5, 0, 1, 1)
-        self.label_14 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_14.setObjectName("label_14")
-        self.gridLayout.addWidget(self.label_14, 5, 1, 1, 1)
-        self.label_15 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_15.setObjectName("label_15")
-        self.gridLayout.addWidget(self.label_15, 5, 2, 1, 1)
-        self.verticalLayout_5.addLayout(self.gridLayout)
+        #zyt
+        # load search page movie infor
+        #self.loadui(self.scrollAreaWidgetContents, self.verticalLayout_5, 1)
+        ######################
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout_3.addWidget(self.scrollArea)
         self.stackedWidget.addWidget(self.search_page)
@@ -169,39 +127,49 @@ class Ui_MainWindow(object):
         self.information_page.setObjectName("information_page")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.information_page)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.movie_infor = QtWidgets.QGridLayout()
-        self.movie_infor.setObjectName("movie_infor")
-        self.label_21 = QtWidgets.QLabel(self.information_page)
-        self.label_21.setObjectName("label_21")
-        self.movie_infor.addWidget(self.label_21, 0, 0, 1, 1)
-        self.label_23 = QtWidgets.QLabel(self.information_page)
-        self.label_23.setObjectName("label_23")
-        self.movie_infor.addWidget(self.label_23, 1, 1, 1, 1)
-        self.label_25 = QtWidgets.QLabel(self.information_page)
-        self.label_25.setObjectName("label_25")
-        self.movie_infor.addWidget(self.label_25, 0, 2, 1, 1)
-        self.label_22 = QtWidgets.QLabel(self.information_page)
-        self.label_22.setObjectName("label_22")
-        self.movie_infor.addWidget(self.label_22, 1, 0, 1, 1)
-        self.label_24 = QtWidgets.QLabel(self.information_page)
-        self.label_24.setObjectName("label_24")
-        self.movie_infor.addWidget(self.label_24, 1, 2, 1, 1)
-        self.verticalLayout_6.addLayout(self.movie_infor)
+
+        #zyt
+        self.movie_widget_container = QtWidgets.QWidget(self.information_page)
+        self.movie_widget_container.setObjectName("movie_widget_container")
+
+        self.movie_widget_container.setStyleSheet(
+            "QWidget#movie_widget_container {"
+            "  border: 1px solid black;"  # 设置边框为1像素黑色实线
+            "  margin: 5px;"  # 设置边距
+            "  padding: 5px;"  # 设置内边距
+            "}"
+        )
+        self.movie_widget_layout = QtWidgets.QVBoxLayout(self.movie_widget_container)
+        self.verticalLayout_6.addWidget(self.movie_widget_container)
+        #####
+
         self.Review_title = QtWidgets.QLabel(self.information_page)
         self.Review_title.setObjectName("Review_title")
         self.verticalLayout_6.addWidget(self.Review_title)
+
         self.review_scrollArea = QtWidgets.QScrollArea(self.information_page)
         self.review_scrollArea.setWidgetResizable(True)
         self.review_scrollArea.setObjectName("review_scrollArea")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 567, 499))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 799, 516))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-        self.label_26 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
-        self.label_26.setGeometry(QtCore.QRect(10, 10, 54, 12))
-        self.label_26.setObjectName("label_26")
+        ##zyt
+        # 创建 review_rc 中的 Ui_Form 类的实例，提供必要的数据参数
+        review_form_instance = review_rc.Ui_Form([])
+
+        # 从 review_form_instance 中获取 widget_
+        review_widget = review_form_instance
+
+        self.layout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
+
+        # 将 review widget 添加到布局中
+        self.layout.addWidget(review_widget)
+
+        ####
         self.review_scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_6.addWidget(self.review_scrollArea)
         self.stackedWidget.addWidget(self.information_page)
+
         self.like_page = QtWidgets.QWidget()
         self.like_page.setObjectName("like_page")
         self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.like_page)
@@ -210,20 +178,51 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 747, 708))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 799, 633))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.loadlike(self.verticalLayout_4)
-
+        #load like page comments
+        self.vertical_like_page = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.vertical_like_page.setObjectName("vertical_like_page")
+        self.loadui(self.scrollAreaWidgetContents_3,self.vertical_like_page,0)
+        ######################
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.addWidget(self.scrollArea_2)
         self.stackedWidget.addWidget(self.like_page)
         self.comments_page = QtWidgets.QWidget()
         self.comments_page.setObjectName("comments_page")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.comments_page)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.scrollArea_3 = QtWidgets.QScrollArea(self.comments_page)
+        self.scrollArea_3.setWidgetResizable(True)
+        self.scrollArea_3.setObjectName("scrollArea_3")
+        self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 799, 633))
+        self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
+        #load comment page comments:
+        self.vertical_comment_page = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_4)
+        self.vertical_comment_page.setObjectName("vertical_comment_page")
+        self.loadui(self.scrollAreaWidgetContents_4,self.vertical_comment_page,0)
+        ###############
+        self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_4)
+        self.verticalLayout_7.addWidget(self.scrollArea_3)
         self.stackedWidget.addWidget(self.comments_page)
         self.favourite_page = QtWidgets.QWidget()
         self.favourite_page.setObjectName("favourite_page")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.favourite_page)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.scrollArea_4 = QtWidgets.QScrollArea(self.favourite_page)
+        self.scrollArea_4.setWidgetResizable(True)
+        self.scrollArea_4.setObjectName("scrollArea_4")
+        self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 799, 633))
+        self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
+        ##########load
+        self.vertical_favor_page = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_5)
+        self.vertical_favor_page.setObjectName("vertical_favor_page")
+        self.loadui(self.scrollAreaWidgetContents_5,self.vertical_favor_page,1)
+        #############
+        self.scrollArea_4.setWidget(self.scrollAreaWidgetContents_5)
+        self.verticalLayout_8.addWidget(self.scrollArea_4)
         self.stackedWidget.addWidget(self.favourite_page)
         self.horizontalLayout.addWidget(self.stackedWidget)
         self.verticalLayout.addWidget(self.down_widget)
@@ -232,8 +231,14 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        #zyt
+        self.display_movies()
+        ##
+
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -243,36 +248,19 @@ class Ui_MainWindow(object):
         self.like_button.setText(_translate("MainWindow", "like"))
         self.comments_button.setText(_translate("MainWindow", "comments"))
         self.favourite_button.setText(_translate("MainWindow", "favourite"))
-        self.name_label.setText(_translate("MainWindow", "Name"))
-        self.review_label.setText(_translate("MainWindow", "Review"))
-        self.rate_label.setText(_translate("MainWindow", "Rate"))
-        self.language_label.setText(_translate("MainWindow", "Language"))
-        self.label_4.setText(_translate("MainWindow", "TextLabel"))
-        self.label_5.setText(_translate("MainWindow", "TextLabel"))
-        self.label_3.setText(_translate("MainWindow", "TextLabel"))
-        self.label_2.setText(_translate("MainWindow", "TextLabel"))
-        self.label_7.setText(_translate("MainWindow", "TextLabel"))
-        self.label_6.setText(_translate("MainWindow", "TextLabel"))
-        self.label_12.setText(_translate("MainWindow", "TextLabel"))
-        self.label.setText(_translate("MainWindow", "TextLabel"))
-        self.label_9.setText(_translate("MainWindow", "TextLabel"))
-        self.label_10.setText(_translate("MainWindow", "TextLabel"))
-        self.label_11.setText(_translate("MainWindow", "TextLabel"))
-        self.label_8.setText(_translate("MainWindow", "TextLabel"))
-        self.label_13.setText(_translate("MainWindow", "TextLabel"))
-        self.label_14.setText(_translate("MainWindow", "TextLabel"))
-        self.label_15.setText(_translate("MainWindow", "TextLabel"))
-        self.label_21.setText(_translate("MainWindow", "moviename"))
-        self.label_23.setText(_translate("MainWindow", "language"))
-        self.label_25.setText(_translate("MainWindow", "rate"))
-        self.label_22.setText(_translate("MainWindow", "genre"))
-        self.label_24.setText(_translate("MainWindow", "review num"))
+        self.Genre_label.setText(_translate("MainWindow", "Genre:"))
+        self.name_label.setText(_translate("MainWindow", "Name:"))
+        self.rate_label.setText(_translate("MainWindow", "Rate:"))
+        self.language_label.setText(_translate("MainWindow", "Language:   "))
+        self.label.setText(_translate("MainWindow", "greater than"))
+        self.submit_pushButton.setText(_translate("MainWindow", "SUBMIT"))
+
         self.Review_title.setText(_translate("MainWindow", "Review"))
-        self.label_26.setText(_translate("MainWindow", "userid"))
+        self.search_button.clicked.connect(self.clearMovieWidget)
 
-
-    def loadlike(self,layout_):
-        with open(json_file_path, 'r') as json_file:
+    def loadui(self,page,layout_,choice=0):
+        filepath =['output.json','movie_information.json']
+        with open(filepath[choice], 'r') as json_file:
             data = json.load(json_file)
         value_length = len(next(iter(data.values())))
         # Create a list for each index
@@ -281,12 +269,87 @@ class Ui_MainWindow(object):
         for key, values in data.items():
             for index, value in enumerate(values):
                 result_lists[index].append(value)
-        print(result_lists)
+        #####chose which UI to load
+        uioption= [comment_rc,movie_info_rc,review_rc]
         # datastructure : rating, reviewtext,review date,image_url
         for i in range(10):  # Adjust the number of instances as needed
-            ui_likepage = like_rc.Ui_likepage()
-            ui_likepage.setupUi(self.like_page,result_lists[i])
-            layout_.addWidget(ui_likepage.widget_6)
-            layout_.addWidget(ui_likepage.widget_6)
+            ui_added = uioption[choice].Ui_Form(result_lists[i])
+            layout_.addWidget(ui_added)
+
+    ############3zyt
+        # 添加一个函数来加载和解析JSON数据
+    def load_movie_data(self):
+        with open('movie_information.json', 'r') as file:
+            data = json.load(file)
+        return data
+
+    # main_ui.py 中的 Ui_MainWindow 类
+    def display_movies(self):
+        movie_data = self.load_movie_data()
+
+        for i in range(len(movie_data['name'])):  # 遍历所有电影
+            # 提取每部电影的所有属性
+            movie_info = [
+                movie_data['name'][i],
+                movie_data['ave_rate'][i],
+                movie_data['genre'][i],
+                movie_data['language'][i],
+                movie_data['review_num'][i]
+            ]
+
+            movie_widget = movie_info_rc.Ui_Form(movie_info)
+            movie_widget.buttonClicked.connect(self.onMovieWidgetSelected)
+            movie_widget.name_clicked.connect(self.on_movie_selected)
+            self.scrollAreaWidgetContents.layout().addWidget(movie_widget)
+
+    def onMovieWidgetSelected(self, widget):
+        self.clearMovieWidget()
+
+        # 复制 widget，这里使用了之前讨论的 copyWidget 方法
+        copied_widget = self.copyWidget(widget)
+        self.movie_widget_layout.addWidget(copied_widget)
+        # 如果 information_page 中没有容器来存放 widget，需要创建一个
+        if not hasattr(self, 'movie_widget_container'):
+            self.movie_widget_container = QtWidgets.QWidget(self.information_page)
+            self.movie_widget_layout = QtWidgets.QVBoxLayout(self.movie_widget_container)
+            self.verticalLayout_6.addWidget(self.movie_widget_container)
+
+        # 添加复制的 widget 到 movie_widget_container
+        self.movie_widget_layout.addWidget(copied_widget)
+
+    def clearMovieWidget(self):
+        # 清除 movie_widget_container 中的所有内容
+        if hasattr(self, 'movie_widget_layout'):
+            while self.movie_widget_layout.count():
+                child = self.movie_widget_layout.takeAt(0)
+                if child.widget():
+                    child.widget().deleteLater()
+
+    def setup_movie_signals(self):
+        for i in range(self.scrollAreaWidgetContents.layout().count()):
+            widget = self.scrollAreaWidgetContents.layout().itemAt(i).widget()
+            if isinstance(widget, movie_info_rc.Ui_Form):
+                widget.name_clicked.connect(self.on_movie_selected)
+
+    def on_movie_selected(self, movie_name):
+        self.stackedWidget.setCurrentIndex(1)  # 切换到 information_page
+
+    def copyWidget(self, original_widget):
+        copied_data = [
+            original_widget.name_pushbutton.text(),
+            original_widget.rate.text(),
+            original_widget.genre.text(),
+            original_widget.language.text(),
+            original_widget.review_num.text()
+        ]
+        copied_widget = movie_info_rc.Ui_Form(copied_data)
+        if original_widget.pushButton.isChecked():
+            copied_widget.pushButton.setChecked(True)
+        return copied_widget
+
+
+
+    #############
+
 
 import resource_rc
