@@ -9,7 +9,8 @@ exports.login = async (req, res) => {
         if (!userid || !password) {
             return res.status(400).json({
                 message: "Missing required fields: userid and password.",
-                status: -1
+                status: -1,
+                username: null
             });
         }
 
@@ -19,14 +20,16 @@ exports.login = async (req, res) => {
                 console.log("**ERROR:", err.message);
                 return res.status(500).json({
                     message: "Error querying user.",
-                    status: -1
+                    status: -1,
+                    username: null
                 });
             }
 
             if (users.length === 0) {
                 return res.status(404).json({
                     message: "User not found.",
-                    status: -1
+                    status: -1,
+                    username: null
                 });
             }
 
@@ -34,12 +37,14 @@ exports.login = async (req, res) => {
             if (password === user.Password) {
                 return res.json({
                     message: "Login successful.",
-                    status: 1
+                    status: 1,
+                    username: user.Username // Include the username in the response
                 });
             } else {
                 return res.status(401).json({
                     message: "Incorrect password.",
-                    status: -1
+                    status: -1,
+                    username: null
                 });
             }
         });
@@ -47,7 +52,8 @@ exports.login = async (req, res) => {
         console.log("**ERROR:", err.message);
         res.status(500).json({
             message: "Internal server error",
-            status: -1
+            status: -1,
+            username: null
         });
     }
 };
