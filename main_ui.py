@@ -116,6 +116,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 799, 490))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        ##########
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
@@ -171,6 +172,8 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
         self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 799, 516))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        ################load search result
+        ################
         self.review_scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_6.addWidget(self.review_scrollArea)
         self.stackedWidget.addWidget(self.information_page)

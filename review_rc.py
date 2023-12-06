@@ -12,11 +12,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import resource_rc
 
 class Ui_Form(QtWidgets.QWidget):
-    def __init__(self, data):
+    def __init__(self):
         super(Ui_Form, self).__init__()
         self.setupUi(data)
 
-    def setupUi(self, data):
+    def setupUi(self):
         self.setObjectName("Form")
         self.resize(1120, 872)
 
