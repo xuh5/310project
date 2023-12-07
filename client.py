@@ -1,18 +1,14 @@
-haha=123
+haha="http://movieapp-nu-web-service-env.eba-8daquwpy.us-east-2.elasticbeanstalk.com"
 import requests  # calling web service
 import json # relational-object mapping
-
-import uuid
+from PyQt5.QtGui import QImage
 import pathlib
 import logging
-import sys
+
 import os
 import base64
 
-from configparser import ConfigParser
 
-import matplotlib.pyplot as plt
-import matplotlib.image as img
 def add_user(data,baseurl=haha):
 
     username = data['username']
@@ -30,16 +26,16 @@ def add_user(data,baseurl=haha):
 
         res = requests.put(url, json=data)
 
-        if res.status_code == 400:  # we'll have an error message
-            body = res.json()
-            userid = body["userid"]
-            message = body["message"]
-            return([False,{'userid':userid,'messgae':message}])
         if res.status_code == 200:
             body = res.json()
             userid = body["userid"]
             message = body["message"]
-            return([True,{'userid':userid,'messgae':message}])
+            return([True,{'userid':userid,'message':message}])
+        else:  # we'll have an error message
+            body = res.json()
+            userid = body["userid"]
+            message = body["message"]
+            return ([False, {'userid': userid, 'message': message}])
 
     except Exception as e:
         logging.error("add_user() failed:")
@@ -47,26 +43,27 @@ def add_user(data,baseurl=haha):
         logging.error(e)
         return
 
-def login(data, baseurl):
+def login(data, baseurl=haha):
     try:
         url = baseurl + '/login'
-        res = requests.get(url, json=data)
+        res = requests.get(url, params=data)
 
         if res.status_code == 200:
             body = res.json()
             return [True, body]
         else:
-            return [False, {"message": "Login Failed ,Wrong username or password"}]
+            body = res.json()
+            return [False, {"message": body['message']}]
     except Exception as e:
         logging.error("login() failed:")
         logging.error("url: " + url)
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def search_film(data, baseurl):
+def search_film(data, baseurl=haha):
     try:
         url = baseurl + '/search_film'
-        res = requests.get(url, json=data)
+        res = requests.get(url, params=data)
         if res.status_code == 200:
             body = res.json()
             data =body["data"]
@@ -81,25 +78,27 @@ def search_film(data, baseurl):
         return [False, {"message": "Request failed"}]
 
 
-def add_review(data,baseurl):
-
-    local_filename = data['filename']
-
-    if not pathlib.Path(local_filename).is_file():
-        message ="Local file '", local_filename, "' does not exist..."
-        return [False,{"message":message}]
-
+def add_review(data,baseurl=haha):
+    has_image=False
+    if(data['filename']):
+        local_filename = data['filename']
+        if not pathlib.Path(local_filename).is_file():
+            message ="Local file '", local_filename, "' does not exist..."
+            return [False,{"message":message}]
+        has_image=True
     try:
-        infile = open(local_filename, "rb")
-        bytes = infile.read()
-        infile.close()
-        image = base64.b64encode(bytes)
-        image_str = image.decode()
+        image_str= ""
+        if(has_image):
+            infile = open(local_filename, "rb")
+            bytes = infile.read()
+            infile.close()
+            image = base64.b64encode(bytes)
+            image_str = image.decode()
 
         api = '/add_review'
         url = baseurl + api
-        data_ = {'userId': data["userId"],'movieId':data['movieId'],'rate':data['rate'],'reviewContent':data['reviewContent']
-                 ,'image_Uploaded':data['image_Uploaded'],'image':image_str}
+        data_ = {'userid': data["userid"],'movieid':data['movieid'],'rate':data['rate'],'reviewContent':data['reviewContent']
+                 ,'image_Uploaded':has_image,'image':image_str}
         res = requests.post(url, json=data_)
         if res.status_code == 200:
             body = res.json()
@@ -109,13 +108,13 @@ def add_review(data,baseurl):
             return [False, {"message": body["message"]}]
 
     except Exception as e:
-        logging.error("upload() failed:")
+        logging.error("add_review() failed:")
         logging.error("url: " + url)
         logging.error(e)
         return
 
 
-def like_review(data, baseurl):
+def like_review(data, baseurl=haha):
     try:
         url = baseurl + '/like_review'
         res = requests.post(url, json=data)
@@ -126,14 +125,14 @@ def like_review(data, baseurl):
             body = res.json()
             return [False, {"message": body["message"]}]
     except Exception as e:
-        logging.error("search_file failed:")
+        logging.error("like_review failed:")
         logging.error("url: " + url)
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def unlike_review(data, baseurl):
+def unlike_review(data, baseurl=haha):
     try:
-        url = baseurl + '/like_review'
+        url = baseurl + '/unlike_review'
         res = requests.post(url, json=data)
         if res.status_code == 200:
             body = res.json()
@@ -142,13 +141,13 @@ def unlike_review(data, baseurl):
             body = res.json()
             return [False, {"message": body["message"]}]
     except Exception as e:
-        logging.error("search_file failed:")
+        logging.error("unlike_review failed:")
         logging.error("url: " + url)
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
 
-def favorite_movie(data, baseurl):
+def favorite_movie(data, baseurl=haha):
     try:
         url = baseurl + '/favorite_movie'
         res = requests.post(url, json=data)
@@ -159,12 +158,12 @@ def favorite_movie(data, baseurl):
             body = res.json()
             return [False, {"message": body["message"]}]
     except Exception as e:
-        logging.error("search_file failed:")
+        logging.error("favorite_movie failed:")
         logging.error("url: " + url)
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def infavorite_movie(data, baseurl):
+def infavorite_movie(data, baseurl=haha):
     try:
         url = baseurl + '/infavorite_movie'
         res = requests.post(url, json=data)
@@ -175,15 +174,15 @@ def infavorite_movie(data, baseurl):
             body = res.json()
             return [False, {"message": body["message"]}]
     except Exception as e:
-        logging.error("search_file failed:")
+        logging.error("infavorite_moviesearch_file failed:")
         logging.error("url: " + url)
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def my_favorite(data,baseurl):
+def my_favorite(data,baseurl=haha):
     try:
         url = baseurl + '/my_favorite'
-        res = requests.get(url, json=data)
+        res = requests.get(url, params=data)
         if res.status_code == 200:
             body = res.json()
             return [True, {"message": body["message"],"data":body["data"]}]
@@ -191,43 +190,98 @@ def my_favorite(data,baseurl):
             body = res.json()
             return [False, {"message": body["message"]}]
     except Exception as e:
-        logging.error("search_file failed:")
+        logging.error("my_favorite failed:")
         logging.error("url: " + url)
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
 
+def download(reviews):
+    for i in reviews:
+        url = i['ImageURL']
+        if url!= None and url!="":
+            image = QImage()
+            x= requests.get(url)
+            if x.status_code!=200:
+                return [False,{"message" :"download image failed"}]
+            image.loadFromData(x.content)
+            i['ImageURL'] = image
+    return [True,{"message":"download image successfully"}]
 
-def checkimage_exist(userid, reviewid):
-    # Construct the image file name
-    imagename = f"{userid}_{reviewid}.png"
 
-    # Define the path to the images folder relative to the current directory
-    image_folder_path = os.path.join(os.getcwd(), "images")
-
-    # Construct the full path to the image file
-    image_path = os.path.join(image_folder_path, imagename)
-
-    # Check if the image file exists and return the result
-    return os.path.exists(image_path)
-
-def movie(data,baseurl):
+def movie(data,baseurl=haha):
     try:
         url = baseurl + '/movie'
-        res = requests.get(url, json=data)
+        res = requests.get(url, params=data)
         if res.status_code == 200:
-            body = res.json()
-            return [True, body['message']]
+            body = res.json()['data']
+            result = download(body['reviews'])
+            if result[0]==False:
+                return [False,result[1]]
+            else:
+                return [True, body['reviews'],body['likedReviews']]
         else:
             body = res.json()
             return [False, {"message": body["message"]}]
     except Exception as e:
-        logging.error("search_file failed:")
+        logging.error("movie failed:")
         logging.error("url: " + url)
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def my_like(data,baseurl):
-    return
-def my_review(data,baseurl):
-    return
+
+def my_like(data,baseurl=haha):
+    try:
+        url = baseurl + '/my_like'
+        res = requests.get(url, params=data)
+        if res.status_code == 200:
+            body = res.json()
+            result = download(body['data'])
+            if result[0] == False:
+                return [False, result[1]]
+            else:
+                return [True, {"message": body["message"],"data":body['data']}]
+        else:
+            body = res.json()
+            return [False, {"message": body["message"]}]
+    except Exception as e:
+        logging.error("my_like failed:")
+        logging.error("url: " + url)
+        logging.error(e)
+        return [False, {"message": "Request failed"}]
+
+def my_review(data,baseurl=haha):
+    try:
+        url = baseurl + '/my_review'
+        res = requests.get(url,params=data)
+        if res.status_code == 200:
+            body = res.json()
+            result = download(body['data'])
+            if result[0] == False:
+                return [False, result[1]]
+            else:
+                return [True, {"message": body["message"],"data":body['data']}]
+        else:
+            body = res.json()
+            return [False, {"message": body["message"]}]
+    except Exception as e:
+        logging.error("my_review failed:")
+        logging.error("url: " + url)
+        logging.error(e)
+        return [False, {"message": "Request failed"}]
+
+if __name__ == '__main__':
+    #print(add_user({"username":"test1","email":"qq.com","password":"123"})) #success
+    print(login({"userid":9 ,"password":"nb666"},haha))
+    print(search_film({"genre":"action"}))
+    #print(add_review({"userid": 5, "movieid": 9, "rate": 10, "reviewContent": "good","filename":""})) #success
+    #print(add_review({"userid":5,"movieid":9,"rate":10,"reviewContent":"good132","filename":"C:/Users/haichen/Desktop/northwestern2023/deep learning/project-object-tracking/test.jpg"}))
+    #not success
+    print(like_review({"userid":5,"reviewid":1}))
+    print(unlike_review({"userid": 5, "reviewid": 1}))
+    print(favorite_movie({"userid":5,"movieid":9}))
+    print(infavorite_movie({"userid": 5, "movieid": 9}))
+    print(my_favorite({"userid": 5}))
+    print(my_like({"userid":5}))
+    print(my_review({"userid":5}))
+    print(movie({"movieid":9,"userid":5}))

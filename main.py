@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui
 import login
 import sys
 import main_ui
+import client
 class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -12,15 +13,27 @@ class LoginWindow(QMainWindow):
         self.ui.pushButton_1.clicked.connect(self.change_widget2)
         self.ui.pushButton_2.clicked.connect(self.change_widget3)
         self.ui.pushButton_3.clicked.connect(self.login_in)
+        self.ui.pushButton_5.clicked.connect(self.register)
         self.show()
+    def register(self):
+        email= self.ui.lineEdit_3.text()
+        username = self.ui.lineEdit_5.text()
+        password = self.ui.lineEdit_4.text()
+        try_register =client.add_user({"username":username,"email":email,"password":password})
+        if(try_register[0]):
+            self.show_notification(try_register[1]['message'],"registered successfully, plz remeber your userid: "
+                                   +str(try_register[1]['userid']))
+        else:
+            self.show_notification("register Failed", try_register[1]['message'])
     def login_in(self):
         account = self.ui.lineEdit.text()
         password = self.ui.lineEdit_2.text()
-        if account =="123" and password =="456":
-            self.win = MainWindow()
+        try_login=client.login({"userid":account,"password":password})
+        if(try_login[0]):
+            self.win = MainWindow(account)
             self.close()
         else:
-            self.show_notification("Login Failed", "Wrong username or password")
+            self.show_notification("Login Failed",try_login[1]['message'])
 
     def show_notification(self, title, message):
         msg_box = QMessageBox(self)
@@ -51,10 +64,10 @@ class LoginWindow(QMainWindow):
         self.ui.widget_3.hide()
         self.ui.widget_2.show()
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self,id):
         super().__init__()
         self.ui= main_ui.Ui_MainWindow()
-        self.ui.setupUi(self)
+        self.ui.setupUi(self,id)
     # xhc_write
         self.ui.search_button.clicked.connect(self.switchsearch)
         self.ui.like_button.clicked.connect(self.switchlike)
@@ -75,5 +88,5 @@ class MainWindow(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    win = MainWindow()
+    win = LoginWindow()
     sys.exit(app.exec_())
