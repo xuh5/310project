@@ -33,6 +33,9 @@ exports.add_review = async (req, res) => {
             await s3.send(new PutObjectCommand(s3Params));
             imageURL = `https://${s3_bucket_name}.s3.amazonaws.com/reviews/${uniqueKey}.jpg`;
         }
+        else{
+            imageURL = null;
+        }
 
         // Insert review into the database
         const insertReviewQuery = "INSERT INTO Review (UserID, MovieID, Rating, ReviewText, ReviewDate, ImageURL) VALUES (?, ?, ?, ?, NOW(), ?)";
