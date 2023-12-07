@@ -13,7 +13,7 @@ exports.my_review = async (req, res) => {
         var rds_response_1 = new Promise((resolve, reject) => {
             try {
                 console.log("/stats: calling RDS...");
-                var sql = "Select * from Review join Movie on Movie.MovieID = Review.MovieID where Review.UserID = ?;";
+                var sql = "Select Review.*, Movie.*, User.Username from Review join Movie join User on Movie.MovieID = Review.MovieID and Review.UserID = User.UserID where Review.UserID = ?;";
                 dbConnection.query(sql, params, (err, results, _) => {
                     try {
                         if (err) {
