@@ -26,16 +26,16 @@ def add_user(data,baseurl=haha):
 
         res = requests.put(url, json=data)
 
-        if res.status_code == 400:  # we'll have an error message
-            body = res.json()
-            userid = body["userid"]
-            message = body["message"]
-            return([False,{'userid':userid,'messgae':message}])
         if res.status_code == 200:
             body = res.json()
             userid = body["userid"]
             message = body["message"]
-            return([True,{'userid':userid,'messgae':message}])
+            return([True,{'userid':userid,'message':message}])
+        else:  # we'll have an error message
+            body = res.json()
+            userid = body["userid"]
+            message = body["message"]
+            return ([False, {'userid': userid, 'message': message}])
 
     except Exception as e:
         logging.error("add_user() failed:")
@@ -203,7 +203,7 @@ def download(reviews):
             image = QImage()
             x= requests.get(url)
             if x.status_code!=200:
-                return [False,{"messgae" :"download image failed"}]
+                return [False,{"message" :"download image failed"}]
             image.loadFromData(x.content)
             i['ImageURL'] = image
     return [True,{"message":"download image successfully"}]
@@ -271,8 +271,8 @@ def my_review(data,baseurl=haha):
         return [False, {"message": "Request failed"}]
 
 if __name__ == '__main__':
-    #print(add_user({"username":"dick","email":"1@1.com","password":"nb666"})) #success
-    print(login({"userid":5 ,"password":"nb666"},haha))
+    #print(add_user({"username":"test1","email":"qq.com","password":"123"})) #success
+    print(login({"userid":9 ,"password":"nb666"},haha))
     print(search_film({"genre":"action"}))
     #print(add_review({"userid": 5, "movieid": 9, "rate": 10, "reviewContent": "good","filename":""})) #success
     #print(add_review({"userid":5,"movieid":9,"rate":10,"reviewContent":"good132","filename":"C:/Users/haichen/Desktop/northwestern2023/deep learning/project-object-tracking/test.jpg"}))

@@ -201,7 +201,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_1.setText(_translate("MainWindow", "login"))
         self.pushButton_2.setText(_translate("MainWindow", "register"))
-        self.lineEdit.setPlaceholderText(_translate("MainWindow", "username:"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "userid:"))
         self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "password:"))
         self.pushButton_3.setText(_translate("MainWindow", "LOGIN"))
         self.lineEdit_3.setPlaceholderText(_translate("MainWindow", "email:"))

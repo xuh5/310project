@@ -16,7 +16,8 @@ import review_rc
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow,id):
+        self.id=id
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(967, 734)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
