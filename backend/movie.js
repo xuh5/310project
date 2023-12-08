@@ -31,8 +31,15 @@ exports.movie = async (req, res) => {
                 });
             }
 
-            // Query to get top ten reviews for the movie
-            const reviewsQuery = "SELECT * FROM Review WHERE MovieID = ? ORDER BY Rating DESC LIMIT 10";
+            // Query to get top ten reviews for the movie, including usernames
+            const reviewsQuery = `
+                SELECT R.*, U.Username 
+                FROM Review R
+                JOIN User U ON R.UserID = U.UserID
+                WHERE R.MovieID = ? 
+                ORDER BY R.Rating DESC 
+                LIMIT 10;
+            `;
             const reviews = await new Promise((resolve, reject) => {
                 dbConnection.query(reviewsQuery, [movieid], (err, reviewsResult) => {
                     if (err) {
@@ -74,7 +81,7 @@ exports.movie = async (req, res) => {
                 }
             }
 
-            // Respond with movie info, reviews, favorite status, and liked reviews
+            // Respond with movie info, reviews (including usernames), favorite status, and liked reviews
             return res.json({
                 message: "Movie data retrieved successfully.",
                 data: {
