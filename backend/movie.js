@@ -31,11 +31,12 @@ exports.movie = async (req, res) => {
                 });
             }
 
-            // Query to get top ten reviews for the movie, including usernames
+            // Query to get top ten reviews for the movie, including usernames and movie titles
             const reviewsQuery = `
-                SELECT R.*, U.Username 
+                SELECT R.*, U.Username, M.Title
                 FROM Review R
                 JOIN User U ON R.UserID = U.UserID
+                JOIN Movie M ON R.MovieID = M.MovieID
                 WHERE R.MovieID = ? 
                 ORDER BY R.Rating DESC 
                 LIMIT 10;
@@ -81,7 +82,7 @@ exports.movie = async (req, res) => {
                 }
             }
 
-            // Respond with movie info, reviews (including usernames), favorite status, and liked reviews
+            // Respond with movie info, reviews (including usernames and movie titles), favorite status, and liked reviews
             return res.json({
                 message: "Movie data retrieved successfully.",
                 data: {
