@@ -10,25 +10,26 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import resource_rc
-
+from PyQt5.QtWidgets import  QApplication, QMainWindow,QMessageBox
+import client
 class Ui_Form(QtWidgets.QWidget):
-    def __init__(self):
+    def __init__(self,main_UI=None,mainwindow=None,id=None):
         super(Ui_Form, self).__init__()
-        self.setupUi(data)
 
-    def setupUi(self):
+        self.setupUi(main_UI,mainwindow,id)
+
+    def setupUi(self,main_UI=None,mainwindow=None,id=None):
+        self.main_UI=main_UI
+        self.MainWindow= mainwindow
+        self.ID= id
         self.setObjectName("Form")
         self.resize(1120, 872)
 
-        self.widget_ = QtWidgets.QWidget(self)
-        self.widget_.setGeometry(QtCore.QRect(180, 80, 761, 401))
-        self.widget_.setObjectName("widget_")
-
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_)
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self)
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
 
-        self.widget_2 = QtWidgets.QWidget(self.widget_)
+        self.widget_2 = QtWidgets.QWidget(self)
         self.widget_2.setMaximumSize(QtCore.QSize(100, 100))
         self.widget_2.setObjectName("widget_2")
 
@@ -54,7 +55,7 @@ class Ui_Form(QtWidgets.QWidget):
         self.verticalLayout_8.addWidget(self.username_label)
         self.horizontalLayout_4.addWidget(self.widget_2)
 
-        self.widget_3 = QtWidgets.QWidget(self.widget_)
+        self.widget_3 = QtWidgets.QWidget(self)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -118,6 +119,9 @@ class Ui_Form(QtWidgets.QWidget):
         self.select_file_button_2.setAutoDefault(False)
         self.select_file_button_2.setDefault(False)
         self.select_file_button_2.setObjectName("select_file_button_2")
+        #zyt
+        self.select_file_button_2.clicked.connect(self.openFileDialog)
+        ###
         self.horizontalLayout_3.addWidget(self.select_file_button_2)
 
         self.file_dir_label_2 = QtWidgets.QLabel(self.widget_6)
@@ -130,6 +134,9 @@ class Ui_Form(QtWidgets.QWidget):
 
         self.submit_button_2 = QtWidgets.QPushButton(self.widget_6)
         self.submit_button_2.setObjectName("submit_button_2")
+        self.submit_button_2.clicked.connect(self.submit_review)
+
+
         self.horizontalLayout_3.addWidget(self.submit_button_2)
         self.verticalLayout.addWidget(self.widget_6)
 
@@ -137,6 +144,9 @@ class Ui_Form(QtWidgets.QWidget):
 
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self)
+
+
+
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
@@ -148,10 +158,39 @@ class Ui_Form(QtWidgets.QWidget):
         self.select_file_button_2.setText(_translate("Form", "upload"))
         self.submit_button_2.setText(_translate("Form", "submit"))
 
-# Example usage
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_Form("std")
-    ui.show()
-    sys.exit(app.exec_())
+
+    #zyt
+    def openFileDialog(self):
+        options = QtWidgets.QFileDialog.Options()
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,
+                                                            "Select a PNG file", "",
+                                                            "PNG Files (*.png);;All Files (*)", options=options)
+        if fileName:
+            self.file_dir_label_2.setText(fileName)
+    #####
+    def submit_review(self):
+        userid = self.main_UI.id
+        rating = self.doubleSpinBox.value()
+        review_text = self.lineEdit.text()
+        file_dir = self.file_dir_label_2.text()
+
+        review_dict = {
+                    "userid": userid,
+                    "movieid": self.ID,
+                    "rate": rating,
+                    "reviewContent": review_text,
+                    "filename": file_dir
+                }
+        try_upload = client.add_review(review_dict)
+        if (not try_upload[0]):
+            self.MainWindow.show_notification("add_review failed", try_upload[1]['message'])
+        else:
+            self.MainWindow.show_notification("add_review successfully", try_upload[1]['message'])
+
+
+
+
+
+
+
+

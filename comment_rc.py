@@ -10,20 +10,21 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import random
+
+import client
 import resource_rc
 
 class Ui_Form(QtWidgets.QWidget):
-    def __init__(self, data):
+    def __init__(self, data,main_UI=None,buttonon=True):
         super(Ui_Form, self).__init__()
-        self.setupUi(data)
+        self.setupUi(data,main_UI,buttonon)
 
-    def setupUi(self, data):
+    def setupUi(self, data,main_UI=None,buttonon=True):
+        self.main_UI=main_UI
         # Adding a random True or False value to data
-        data.append(random.choice([True, False]))
-
         self.setObjectName("Ui_Form")
         self.resize(591, 482)
-
+        self.ID= data['ReviewID']
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self)
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
@@ -109,11 +110,11 @@ class Ui_Form(QtWidgets.QWidget):
         self.pushButton = QtWidgets.QToolButton(self.widget_5)
         self.pushButton.setText("")
         self.pushButton.setCheckable(True)  # Make the button checkable
-        self.pushButton.setChecked(data[4])  # Set the initial state
+        self.pushButton.setChecked(buttonon)  # Set the initial state
         self.checked_image = QtGui.QPixmap(":/icons/icons/like_t.png")
         self.unchecked_image = QtGui.QPixmap(":/icons/icons/like.png")
-        self.pushButton.toggled.connect(self.onToggleButtonClicked)
-        self.onToggleButtoninitialize()
+        self.pushButton.toggled.connect(self.checkPrecondition)
+        self.Buttoninitialize()
         self.pushButton.setObjectName("pushButton")
 
         self.horizontalLayout_5.addWidget(self.pushButton)
@@ -131,20 +132,38 @@ class Ui_Form(QtWidgets.QWidget):
 
         self.verticalLayout_7.addWidget(self.widget_5)
 
+
         self.retranslateUi(data)
-        QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, data):
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Ui_Form", "Form"))
-        self.label_17.setText(_translate("Ui_Form", "name"))
-        self.label_18.setText(_translate("Ui_Form", "Movie name"))
-        self.label_19.setText(_translate("Ui_Form", str(data[1])))
-        self.label_27.setText(_translate("Ui_Form", str(data[0])))
-        self.label_20.setPixmap(QtGui.QPixmap(data[3]))
-        self.label_28.setText(_translate("Ui_Form", str(data[2])))
 
-    def onToggleButtoninitialize(self):
+        _translate = QtCore.QCoreApplication.translate
+
+        self.setWindowTitle(_translate("Ui_Form", "Form"))
+        self.label_17.setText(_translate("Ui_Form", str(data['Username'])))
+        self.label_18.setText(_translate("Ui_Form", "Movie name"))
+        self.label_19.setText(_translate("Ui_Form", data['ReviewText']))
+        self.label_27.setText(_translate("Ui_Form", 'Rate:'+str(data['Rating'])))
+        if(data['ImageURL']!="" and data['ImageURL']!=None ):
+            self.label_20.setPixmap(QtGui.QPixmap(data['ImageURL'] ))
+        self.label_28.setText(_translate("Ui_Form",data['ReviewDate']))
+
+    def checkPrecondition(self, checked):
+        if not self.shouldToggle(checked):
+            self.pushButton.blockSignals(True)
+            self.pushButton.setChecked(not checked)
+            self.pushButton.blockSignals(False)
+        else:
+            self.changeImage(checked)
+
+    def shouldToggle(self,checked):
+        if(checked):
+            tmp_result = client.like_review({"userid":self.main_UI.id,'reviewid':self.ID})
+        else:
+            tmp_result = client.unlike_review({"userid":self.main_UI.id,'reviewid':self.ID})
+        return tmp_result[0]
+
+    def Buttoninitialize(self):
         icon = QtGui.QIcon()
         if self.pushButton.isChecked():
             icon.addPixmap(self.checked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -152,7 +171,7 @@ class Ui_Form(QtWidgets.QWidget):
             icon.addPixmap(self.unchecked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
 
-    def onToggleButtonClicked(self,state):
+    def changeImage(self,state):
         icon = QtGui.QIcon()
         if state:
             icon.addPixmap(self.checked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -160,10 +179,5 @@ class Ui_Form(QtWidgets.QWidget):
             icon.addPixmap(self.unchecked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_Form(["1", "1", "1", "./images/sb.png"])
-    ui.show()
-    sys.exit(app.exec_())
+
 

@@ -84,6 +84,12 @@ class MainWindow(QMainWindow):
     def swithfavourite(self):
         self.ui.stackedWidget.setCurrentIndex(4)
     ######
+    def show_notification(self, title, message):
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle(title)
+        msg_box.setText(message)
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.exec_()
 
 
 if __name__ == '__main__':

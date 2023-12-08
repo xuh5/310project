@@ -13,16 +13,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
 import resource_rc
 import random
-
+import client
 class Ui_Form(QtWidgets.QWidget):
-    def __init__(self, data):
+    def __init__(self, data,main_UI=None,buttonon=True):
         super(Ui_Form, self).__init__()
-        self.setupUi(data)
+        self.setupUi(data,main_UI,buttonon)
 
-    def setupUi(self, data):
+    def setupUi(self, data,main_UI=None,buttonon=True):
+        self.main_UI=main_UI
         self.setObjectName("Form")
         self.resize(667, 522)
-
+        self.ID= data['MovieID']
         self.verticalLayout_10 = QtWidgets.QVBoxLayout(self)
         self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
@@ -56,11 +57,11 @@ class Ui_Form(QtWidgets.QWidget):
         self.pushButton = QtWidgets.QToolButton(self.collect_widget)
         self.pushButton.setText("")
         self.pushButton.setCheckable(True)  # Make the button checkable
-        self.pushButton.setChecked(True)  # Set the initial state
+        self.pushButton.setChecked(buttonon)  # Set the initial state
         self.checked_image = QtGui.QPixmap(":/icons/icons/favor_t.png")
         self.unchecked_image = QtGui.QPixmap(":/icons/icons/favor.png")
-        self.pushButton.toggled.connect(self.onToggleButtonClicked)
-        self.onToggleButtoninitialize()
+        self.pushButton.toggled.connect(self.checkPrecondition)
+        self.Buttoninitialize()
         self.pushButton.setObjectName("pushButton")
 
         self.horizontalLayout_3.addWidget(self.pushButton)
@@ -76,7 +77,6 @@ class Ui_Form(QtWidgets.QWidget):
         self.name_pushbutton.setStyleSheet("\n"
 "#name_pushbutton{\n"
 "text-align: left;\n"
-"border:none;\n"
 "padding-left: 20px; \n"
 "}")
         self.name_pushbutton.setAutoDefault(False)
@@ -85,35 +85,45 @@ class Ui_Form(QtWidgets.QWidget):
 
         self.verticalLayout_10.addLayout(self.movie_gridLayout)
         self.retranslateUi(data)
-        QtCore.QMetaObject.connectSlotsByName(self)
+        ###namebutton function
+        pages=[self.main_UI.movie_widget_layout,self.main_UI.movie_reviews_page]
+        self.name_pushbutton.clicked.connect(lambda:
+            self.main_UI.loadui_movie(pages, {"movieid":self.ID,"userid": self.main_UI.id}))
 
     def retranslateUi(self, data):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Form", "Form"))
-        self.language.setText(_translate("Form", str(data[3])))
-        self.review_num.setText(_translate("Form", str(data[4])))
-        self.rate.setText(_translate("Form", str(data[1])))
-        self.genre.setText(_translate("Form", str(data[2])))
-        self.name_pushbutton.setText(_translate("Form", str(data[0])))
-    def onToggleButtoninitialize(self):
+        self.language.setText(_translate("Form", data['Language']))
+        self.review_num.setText(_translate("Form", "Review num: "+str(data['ReviewQuantity'])))
+        self.rate.setText(_translate("Form", "rate: "+ str(data['AverageRate'])))
+        self.genre.setText(_translate("Form", data['Genre']))
+        self.name_pushbutton.setText(_translate("Form", data['Title']))
+    def Buttoninitialize(self):
         icon = QtGui.QIcon()
         if self.pushButton.isChecked():
             icon.addPixmap(self.checked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
         else:
             icon.addPixmap(self.unchecked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
-
-    def onToggleButtonClicked(self,state):
+    def changeImage(self,state):
         icon = QtGui.QIcon()
         if state:
             icon.addPixmap(self.checked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
         else:
             icon.addPixmap(self.unchecked_image, QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
-# Example usage
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_Form(["Movie Name", "Rate", "Genre", "Language", "Review Number"])
-    ui.show()
-    sys.exit(app.exec_())
+    def checkPrecondition(self, checked):
+        if not self.shouldToggle(checked):
+            self.pushButton.blockSignals(True)
+            self.pushButton.setChecked(not checked)
+            self.pushButton.blockSignals(False)
+        else:
+            self.changeImage(checked)
+
+    def shouldToggle(self,checked):
+        if(checked):
+            tmp_result = client.favorite_movie({"userid":self.main_UI.id,'movieid':self.ID})
+        else:
+            tmp_result = client.infavorite_movie({"userid":self.main_UI.id,'movieid':self.ID})
+        return tmp_result[0]
+

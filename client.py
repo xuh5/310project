@@ -66,8 +66,7 @@ def search_film(data, baseurl=haha):
         res = requests.get(url, params=data)
         if res.status_code == 200:
             body = res.json()
-            data =body["data"]
-            return [True, data]
+            return [True, body]
         else:
             body = res.json()
             return [False, {"message": body["message"]}]
@@ -219,7 +218,7 @@ def movie(data,baseurl=haha):
             if result[0]==False:
                 return [False,result[1]]
             else:
-                return [True, body['reviews'],body['likedReviews']]
+                return [True, body]
         else:
             body = res.json()
             return [False, {"message": body["message"]}]
@@ -272,16 +271,16 @@ def my_review(data,baseurl=haha):
 
 if __name__ == '__main__':
     #print(add_user({"username":"test1","email":"qq.com","password":"123"})) #success
-    print(login({"userid":9 ,"password":"nb666"},haha))
-    print(search_film({"genre":"action"}))
+    #print(login({"userid":9 ,"password":"nb666"},haha))
+    #print(search_film({"genre":"","language":"English"}))
     #print(add_review({"userid": 5, "movieid": 9, "rate": 10, "reviewContent": "good","filename":""})) #success
     #print(add_review({"userid":5,"movieid":9,"rate":10,"reviewContent":"good132","filename":"C:/Users/haichen/Desktop/northwestern2023/deep learning/project-object-tracking/test.jpg"}))
     #not success
-    print(like_review({"userid":5,"reviewid":1}))
-    print(unlike_review({"userid": 5, "reviewid": 1}))
-    print(favorite_movie({"userid":5,"movieid":9}))
-    print(infavorite_movie({"userid": 5, "movieid": 9}))
-    print(my_favorite({"userid": 5}))
+    #print(like_review({"userid":5,"reviewid":3}))
+    #print(unlike_review({"userid": 5, "reviewid": 1}))
+    #print(favorite_movie({"userid":5,"movieid":3}))
+    #print(infavorite_movie({"userid": 5, "movieid": 9}))
+    #print(my_favorite({"userid": 5}))
     print(my_like({"userid":5}))
-    print(my_review({"userid":5}))
-    print(movie({"movieid":9,"userid":5}))
+    #print(my_review({"userid":5}))
+    #print(movie({"movieid":1,"userid":5}))
