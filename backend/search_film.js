@@ -11,8 +11,8 @@ exports.search_film = async (req, res) => {
         const params = [];
 
         if (name) {
-            conditions.push("Title LIKE ? ");
-            params.push('%${name}%');
+            conditions.push("Title LIKE ?");
+            params.push(`%${name}%`);
         }
 
         if (genre) {
