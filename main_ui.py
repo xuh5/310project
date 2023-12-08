@@ -308,7 +308,7 @@ class Ui_MainWindow(object):
         genre = self.review_comboBox.currentText()
         language_selection = self.language_comboBox.currentText()
         search_parameters = {
-            "movieName": search_text,
+            "name": search_text,
             "rate": rate,
             "genre": genre,
             "language": language_selection
