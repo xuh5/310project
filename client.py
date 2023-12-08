@@ -1,4 +1,3 @@
-haha="http://movieapp-nu-web-service-env.eba-8daquwpy.us-east-2.elasticbeanstalk.com"
 import requests  # calling web service
 import json # relational-object mapping
 from PyQt5.QtGui import QImage
@@ -7,9 +6,14 @@ import logging
 
 import os
 import base64
+from configparser import ConfigParser
+config_file = 'movieapp-config.ini'
+configur = ConfigParser()
+configur.read(config_file)
+baseurl = configur.get('client', 'webservice')
 
 
-def add_user(data,baseurl=haha):
+def add_user(data,baseurl=baseurl):
 
     username = data['username']
     email = data['email']
@@ -43,7 +47,7 @@ def add_user(data,baseurl=haha):
         logging.error(e)
         return
 
-def login(data, baseurl=haha):
+def login(data, baseurl=baseurl):
     try:
         url = baseurl + '/login'
         res = requests.get(url, params=data)
@@ -60,7 +64,7 @@ def login(data, baseurl=haha):
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def search_film(data, baseurl=haha):
+def search_film(data, baseurl=baseurl):
     try:
         url = baseurl + '/search_film'
         res = requests.get(url, params=data)
@@ -77,7 +81,7 @@ def search_film(data, baseurl=haha):
         return [False, {"message": "Request failed"}]
 
 
-def add_review(data,baseurl=haha):
+def add_review(data,baseurl=baseurl):
     has_image=False
     if(data['filename']):
         local_filename = data['filename']
@@ -113,7 +117,7 @@ def add_review(data,baseurl=haha):
         return
 
 
-def like_review(data, baseurl=haha):
+def like_review(data, baseurl=baseurl):
     try:
         url = baseurl + '/like_review'
         res = requests.post(url, json=data)
@@ -129,7 +133,7 @@ def like_review(data, baseurl=haha):
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def unlike_review(data, baseurl=haha):
+def unlike_review(data, baseurl=baseurl):
     try:
         url = baseurl + '/unlike_review'
         res = requests.post(url, json=data)
@@ -146,7 +150,7 @@ def unlike_review(data, baseurl=haha):
         return [False, {"message": "Request failed"}]
 
 
-def favorite_movie(data, baseurl=haha):
+def favorite_movie(data, baseurl=baseurl):
     try:
         url = baseurl + '/favorite_movie'
         res = requests.post(url, json=data)
@@ -162,7 +166,7 @@ def favorite_movie(data, baseurl=haha):
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def infavorite_movie(data, baseurl=haha):
+def infavorite_movie(data, baseurl=baseurl):
     try:
         url = baseurl + '/infavorite_movie'
         res = requests.post(url, json=data)
@@ -178,7 +182,7 @@ def infavorite_movie(data, baseurl=haha):
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def my_favorite(data,baseurl=haha):
+def my_favorite(data,baseurl=baseurl):
     try:
         url = baseurl + '/my_favorite'
         res = requests.get(url, params=data)
@@ -208,7 +212,7 @@ def download(reviews):
     return [True,{"message":"download image successfully"}]
 
 
-def movie(data,baseurl=haha):
+def movie(data,baseurl=baseurl):
     try:
         url = baseurl + '/movie'
         res = requests.get(url, params=data)
@@ -229,7 +233,7 @@ def movie(data,baseurl=haha):
         return [False, {"message": "Request failed"}]
 
 
-def my_like(data,baseurl=haha):
+def my_like(data,baseurl=baseurl):
     try:
         url = baseurl + '/my_like'
         res = requests.get(url, params=data)
@@ -249,7 +253,7 @@ def my_like(data,baseurl=haha):
         logging.error(e)
         return [False, {"message": "Request failed"}]
 
-def my_review(data,baseurl=haha):
+def my_review(data,baseurl=baseurl):
     try:
         url = baseurl + '/my_review'
         res = requests.get(url,params=data)

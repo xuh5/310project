@@ -141,7 +141,7 @@ class Ui_Form(QtWidgets.QWidget):
 
         self.setWindowTitle(_translate("Ui_Form", "Form"))
         self.label_17.setText(_translate("Ui_Form", str(data['Username'])))
-        self.label_18.setText(_translate("Ui_Form", "Movie name"))
+        self.label_18.setText(_translate("Ui_Form", data['Title']))
         self.label_19.setText(_translate("Ui_Form", data['ReviewText']))
         self.label_27.setText(_translate("Ui_Form", 'Rate:'+str(data['Rating'])))
         if(data['ImageURL']!="" and data['ImageURL']!=None ):
