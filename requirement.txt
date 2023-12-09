@@ -1,0 +1,8 @@
+PyQt5
+sys
+json
+pathlib
+logging
+requests
+configparser
+os
